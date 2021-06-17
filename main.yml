@@ -1,18 +1,18 @@
 ---
-- host: ubuntu
-  gather_facts: no
+- hosts: ubuntu
+  gather_facts: yes
   roles:
-    - nginx
+   - nginx
   tags: web
 
-- host: ubuntu
+- hosts: ubuntu
   gather_facts: no
   roles:
-    - sites
+   - sites
   tags: site
 
-- host: ubuntu
+- hosts: ubuntu
   gather_facts: no
   roles:
-    - system
+   - system
   tags: system

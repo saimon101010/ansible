@@ -1,0 +1,29 @@
+---
+  - name: Change fs.file-max
+    lineinfile:
+      path: /etc/sysctl.conf
+      line: "fs.file-max = 1204000"
+      state: present
+
+  - name: Change somaxconn
+    lineinfile:
+      path: /etc/sysctl.conf
+      line: "net.core.somaxconn = 16384"
+      state: present
+  
+  - name: Rebuild conf
+    command: "sysctl -p"
+
+  - name: Add 1 ssh-key
+    lineinfile:
+      path: ~/.ssh/authorized_keys
+      line: "{{ first_key }}"
+      state: present
+      create: yes
+
+  - name: Add 2 ssh-key
+    lineinfile:
+      path: ~/.ssh/authorized_keys
+      line: "{{ second_key }}"
+      state: present
+      

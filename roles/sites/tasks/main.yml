@@ -1,0 +1,35 @@
+---
+  - name: Delete default nginx html
+    file:
+      path: /var/www
+      state: absent
+
+  - name: Copy secret key
+    copy:
+      src: files/
+      dest: ~/.ssh
+      mode: 0600
+
+  - name: Copy page from git
+    git: 
+      repo: "{{ git_url }}"
+      dest: /var/www
+      key_file: "{{ private_key_name }}"
+      force: yes
+    register: result
+  
+  - name: Copy config nginx
+    template: 
+      src: nginx.conf.j2
+      dest: /etc/nginx/sites-available/default
+
+  - name: Restart nginx
+    service:
+      name: nginx.service
+      state: restarted
+  
+  - name: Delete ssh-key
+    file:
+      state: absent
+      path: ~/.ssh/"{{ private_key_name }}"
+
