@@ -1,4 +1,4 @@
 ubuntu:
   hosts:
     ubuntu-server:
-      ansible_host: 188.227.35.57 
+      ansible_host: 

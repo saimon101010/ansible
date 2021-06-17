@@ -16,7 +16,7 @@
       dest: /var/www
       key_file: "{{ private_key_name }}"
       force: yes
-    register: result
+    
   
   - name: Copy config nginx
     template: 
